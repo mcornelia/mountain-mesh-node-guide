@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mountain Mesh Node Setup Guide</title>
+  <meta name="description" content="Step-by-step guide for setting up a Meshtastic LoRa radio and joining the Mountain Mesh network. Long-range SMS with no cell service or internet required.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="site-wrapper">
+
+  <nav class="site-nav">
+    <div class="nav-name"><a href="https://mcornelia.com">Mike Cornelia</a></div>
+    <ul class="nav-links">
+      <li><a href="https://mcornelia.com/play.html">&larr; Back to Code</a></li>
+    </ul>
+  </nav>
+
+  <main class="mc-post">
+
+    <div class="mc-post-header">
+      <h1>Mountain Mesh Node Setup Guide</h1>
+    </div>
+
+    <p>Welcome to the step-by-step guide on how to create and add a Meshtastic node to the <a href="https://mtnme.sh/" target="_blank" rel="noopener">Mountain Mesh</a> network. Mountain Mesh is a community group building a resilient, decentralized, and community-owned communications network in the southern Appalachian Mountains using the open-source Meshtastic platform.</p>
+
+    <p>This guide will walk you through the entire process, from selecting the right hardware to configuring your node for the Mountain Mesh network.</p>
+
+    <h2>Table of Contents</h2>
+
+    <ol>
+      <li><a href="#introduction-to-mountain-mesh">Introduction to Mountain Mesh</a></li>
+      <li><a href="#hardware-selection">Hardware Selection</a></li>
+      <li><a href="#flashing-firmware">Flashing Firmware</a></li>
+      <li><a href="#initial-configuration">Initial Configuration</a></li>
+      <li><a href="#mountain-mesh-specific-configuration">Mountain Mesh Specific Configuration</a></li>
+      <li><a href="#resources-and-community">Resources and Community</a></li>
+    </ol>
+
+    <h2 id="introduction-to-mountain-mesh">Introduction to Mountain Mesh</h2>
+
+    <p>Mountain Mesh operates in the 915 MHz ISM band, which is legal for unlicensed use in the United States. The community is focused on deploying the Meshtastic platform, an open-source, long-range, low-power mesh networking solution that uses inexpensive, off-the-shelf LoRa radios.</p>
+
+    <div class="mc-callout">
+      <p><strong>Network update:</strong> As of October 1, 2025, Mountain Mesh migrated their network to the <code>MediumFast</code> modem preset to reduce message collisions and network congestion.</p>
+    </div>
+
+    <h2 id="hardware-selection">Hardware Selection</h2>
+
+    <p>Before you begin, you need to select a Meshtastic-compatible device. There are several options depending on your needs and technical expertise.</p>
+
+    <h3>Recommended Devices for Beginners</h3>
+
+    <p>For those new to Meshtastic, plug-and-play devices are highly recommended.</p>
+
+    <ul>
+      <li><strong>Heltec V3</strong> &mdash; A very affordable and popular bare board option. It requires a case and battery but is a great starting point.</li>
+      <li><strong>LILYGO T-Echo</strong> &mdash; An all-in-one unit with an E-Ink screen, GPS, and battery in an injection-molded case. It uses the power-efficient nRF52 chip.</li>
+      <li><strong>RAK Wireless WisBlock</strong> &mdash; A modular hardware system that offers excellent battery life and flexibility for adding sensors. RAK offers starter kits that are easy to assemble.</li>
+    </ul>
+
+    <h3>Mountain Mesh Custom Hardware</h3>
+
+    <p>The Mountain Mesh community has also designed custom hardware:</p>
+
+    <ul>
+      <li><strong>MeshToad</strong> &mdash; A Meshtastic-compatible LoRa radio designed to turn any Linux computer into a Meshtastic node via USB-C. It features a 1W TX and an LNA for increased RX sensitivity.</li>
+    </ul>
+
+    <h2 id="flashing-firmware">Flashing Firmware</h2>
+
+    <p>Once you have your hardware, you need to install the Meshtastic firmware.</p>
+
+    <div class="mc-callout">
+      <p><strong>Critical safety step:</strong> Never power on the radio without attaching an antenna. Doing so can permanently damage the radio chip.</p>
+    </div>
+
+    <ol>
+      <li><strong>Connect your device.</strong> Use a high-quality USB data cable to connect your device to your computer. Ensure the cable supports data transfer, not just charging.</li>
+      <li><strong>Attach the antenna</strong> before applying power.</li>
+      <li><strong>Use the Web Flasher.</strong> The easiest way to flash firmware is using the official <a href="https://flasher.meshtastic.org/" target="_blank" rel="noopener">Meshtastic Web Flasher</a>. This requires a Chromium-based browser (Chrome or Edge).</li>
+      <li><strong>Select your device.</strong> Follow the on-screen instructions to select your specific device model and the latest stable firmware version.</li>
+      <li><strong>Flash.</strong> Click the flash button and wait for the process to complete.</li>
+    </ol>
+
+    <h2 id="initial-configuration">Initial Configuration</h2>
+
+    <p>After flashing, you need to perform the initial setup.</p>
+
+    <ol>
+      <li><strong>Download the App.</strong> Download the Meshtastic app on your iOS or Android device.</li>
+      <li><strong>Pair via Bluetooth.</strong> Open the app and pair it with your Meshtastic node via Bluetooth.</li>
+      <li><strong>Set Region.</strong> The most critical initial step is setting your LoRa region. For the United States (and Mountain Mesh), set the region to <code>US (902.0 - 928.0 MHz)</code>.</li>
+    </ol>
+
+    <h2 id="mountain-mesh-specific-configuration">Mountain Mesh Specific Configuration</h2>
+
+    <p>To join the Mountain Mesh network, you must configure your node with their specific settings. These settings prioritize network stability by reducing unnecessary &ldquo;chattiness&rdquo; on the shared bandwidth.</p>
+
+    <h3>1. Modem Preset and Frequency</h3>
+
+    <p>Mountain Mesh uses the <code>MediumFast</code> preset.</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Setting</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Modem Preset</strong></td>
+          <td><code>MediumFast</code></td>
+        </tr>
+        <tr>
+          <td><strong>Frequency Slot</strong></td>
+          <td><code>45</code> (913.125 MHz)</td>
+        </tr>
+        <tr>
+          <td><strong>Hop Limit</strong></td>
+          <td><code>5</code> (do not set higher than 6)</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>2. Channel Configuration</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Channel</th>
+          <th>Name</th>
+          <th>PSK</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Primary (0)</strong></td>
+          <td><code>MediumFast</code></td>
+          <td><code>AQ==</code></td>
+          <td>Required</td>
+        </tr>
+        <tr>
+          <td><strong>Secondary (1)</strong></td>
+          <td><code>LongFast</code></td>
+          <td><code>AQ==</code></td>
+          <td>Optional &mdash; allows you to receive messages from bridged nodes</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>3. Role and Telemetry Settings</h3>
+
+    <p>Your settings should vary based on how you use your node.</p>
+
+    <h4>Personal Mobile Nodes (Everyday Carry)</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Setting</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Device Role</strong></td>
+          <td><code>CLIENT</code> or <code>CLIENT_MUTE</code></td>
+        </tr>
+        <tr>
+          <td><strong>NodeInfo Interval</strong></td>
+          <td><code>10800</code> (3 hours)</td>
+        </tr>
+        <tr>
+          <td><strong>Smart Position</strong></td>
+          <td><code>True</code> (Smart Interval: 15 mins, Smart Distance: 1 km)</td>
+        </tr>
+        <tr>
+          <td><strong>Broadcast Interval</strong></td>
+          <td><code>10800</code> (3 hours)</td>
+        </tr>
+        <tr>
+          <td><strong>Ignore MQTT</strong></td>
+          <td><code>True</code></td>
+        </tr>
+        <tr>
+          <td><strong>OK to MQTT</strong></td>
+          <td><code>True</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Personal / Local Infrastructure (Home Base Stations)</h4>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Setting</th>
+          <th>Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Device Role</strong></td>
+          <td><code>CLIENT</code> or <code>CLIENT_BASE</code></td>
+        </tr>
+        <tr>
+          <td><strong>NodeInfo Interval</strong></td>
+          <td><code>21600</code> (6 hours)</td>
+        </tr>
+        <tr>
+          <td><strong>Hop Limit</strong></td>
+          <td><code>3</code></td>
+        </tr>
+        <tr>
+          <td><strong>Smart Position</strong></td>
+          <td><code>False</code></td>
+        </tr>
+        <tr>
+          <td><strong>Fixed Position</strong></td>
+          <td><code>True</code> (set manually)</td>
+        </tr>
+        <tr>
+          <td><strong>Broadcast Interval</strong></td>
+          <td><code>21600</code> (6 hours)</td>
+        </tr>
+        <tr>
+          <td><strong>Ignore MQTT</strong></td>
+          <td><code>True</code></td>
+        </tr>
+        <tr>
+          <td><strong>OK to MQTT</strong></td>
+          <td><code>True</code></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Auto-Configuration</h3>
+
+    <p>Mountain Mesh provides an auto-configuration URL and QR code on their <a href="https://mtnme.sh/mediumfast/" target="_blank" rel="noopener">MediumFast Migration page</a>. Scanning this QR code with your phone&rsquo;s camera while the Meshtastic app is open will automatically apply the basic MediumFast settings.</p>
+
+    <h2 id="resources-and-community">Resources and Community</h2>
+
+    <ul>
+      <li><strong>Mountain Mesh website:</strong> <a href="https://mtnme.sh/" target="_blank" rel="noopener">mtnme.sh</a></li>
+      <li><strong>Mountain Mesh Discord:</strong> Join their active Discord community for support, events, and meetups. Links are available on their website.</li>
+      <li><strong>Live map:</strong> View the network in real-time using their <a href="https://view.mtnme.sh/" target="_blank" rel="noopener">MeshView instance</a>.</li>
+      <li><strong>Official Meshtastic documentation:</strong> <a href="https://meshtastic.org/docs/" target="_blank" rel="noopener">meshtastic.org/docs</a></li>
+    </ul>
+
+    <hr>
+
+    <p><em>This guide was created to help new users easily join the Mountain Mesh network. For the most up-to-date information, always refer to the official Mountain Mesh website.</em></p>
+
+  </main>
+
+  <footer class="site-footer">
+    &copy; 2026 Mike Cornelia &middot; <a href="https://mcornelia.com">mcornelia.com</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
