@@ -1,0 +1,5 @@
+# robots.txt for Mountain Mesh Node Setup Guide
+User-agent: *
+Allow: /
+
+Sitemap: https://mcornelia.github.io/mountain-mesh-node-guide/sitemap.xml
