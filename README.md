@@ -1,5 +1,7 @@
 # Mountain Mesh Node Setup Guide
 
+This guide's original text, examples, HTML, and CSS are licensed under the [MIT License](LICENSE). Images, logos, third-party material, and linked firmware or services are not included in this grant.
+
 Welcome to the step-by-step guide on how to create and add a Meshtastic node to the [Mountain Mesh](https://mtnme.sh/) network. Mountain Mesh is a community group building a resilient, decentralized, and community-owned communications network in the southern Appalachian Mountains using the open-source Meshtastic platform.
 
 This guide will walk you through the entire process, from selecting the right hardware to configuring your node for the Mountain Mesh network.
